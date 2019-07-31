@@ -15,12 +15,23 @@ export class ProfileComponent implements OnInit {
  imageChangedEvent: any = '';
  croppedImage: any = '';
  picture: any;
+ avatar: string = '';
   constructor(private userService: UserService, private authenticationService: AuthenticationService,
     private firebaseStorage: AngularFireStorage ) {
     this.authenticationService.getStatus().subscribe((status) => {
       this.userService.getUserById(status.uid).valueChanges().subscribe((data: User) => {
         this.user = data;
-        console.log(this.user);
+        switch (this.user.status) {
+          case 'online':
+             this.avatar = "avatarFrameonline";
+          break;
+          case 'busy':
+             this.avatar = "avatarFrameBusy";
+          break;
+          case 'apear_offline':
+             this.avatar = "avatarFrameoffline";
+          break;
+        }
       }, (error) => {
         console.log(error);
       });

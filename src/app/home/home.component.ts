@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   query: string = '';
   closeResult: string;
   friendEmail: string = '';
+  avatar: string = '';
   constructor(private userService: UserService, private authenticationService: AuthenticationService,
     private router: Router, private modalService: NgbModal, private requestsService: RequestsService) {
       this.authenticationService.getStatus().subscribe((status) => {
@@ -24,6 +25,17 @@ export class HomeComponent implements OnInit {
           this.user = data;
           if (this.user.friends) {
             this.user.friends = Object.values(this.user.friends);
+          }
+          switch (this.user.status) {
+            case 'online':
+               this.avatar = "avatarFrameonline";
+            break;
+            case 'busy':
+               this.avatar = "avatarFrameBusy";
+            break;
+            case 'apear_offline':
+               this.avatar = "avatarFrameoffline";
+            break;
           }
         }, (error) => {
           console.log(error);
@@ -37,6 +49,7 @@ export class HomeComponent implements OnInit {
      }, (error) => {
       console.log(error);
     });
+   
    }
 
   ngOnInit() {

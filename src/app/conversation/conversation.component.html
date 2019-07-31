@@ -2,14 +2,14 @@
     <div class="row">
         <div class="col-sm-3 maxwi300">
             <div id="conversationSidebar">
-                <div class="vh20">
-                    <div class="avatarFrameonline">
+                <div class="vh45">
+                    <div class="{{avatar}}">
                         <img [src]="user.avatar || 'assets/img/generic_avatar.png'" class="avatarImage img-fluid">
                     </div>
                 </div>
                 <div class="vh30"></div>
                 <div class="vh20">
-                    <div class="avatarFrameonline">
+                    <div class="{{avatarFriend}}">
                         <img [src]="friend.avatar || 'assets/img/generic_avatar.png'" class="avatarImage img-fluid">
                     </div>
                 </div>
@@ -22,7 +22,10 @@
             <div class="vh40 overscroll pabo10" id="messageArea">
                 <div class="messageGroup" *ngFor="let m of conversation">
                     <b> {{getUserNickById(m.sender)}} </b> dice: <br/>
-                    <span>{{m.text}}</span>
+                    <span *ngIf="m.type=='image'">
+                        <img [src]="m.text">
+                    </span>
+                    <span *ngIf="m.type !='image'">{{m.text}}</span>
                 </div>
             </div>
             <div class="messageControlsContainer">
@@ -32,11 +35,16 @@
                     <div class="item" (click)="sendZumbido()">
                         <img src="assets/img/zumbido.png" class="tool">
                     </div>
-                    <a class="btn btn-primary btn-sm marri10" accept="image/*">Enviar</a>
+                    <div class="item">
+                        <a class="botonConver " accept="image/*" (click)="Enviar()">Enviar</a>
+                    </div>
                     <label class="custom-file-upload">
-              <input type="file">
+              <input type="file" (change)="fileChangeEvent($event)">
               <i name="image"></i> Seleccionar Imagen
             </label>
+
+                    <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="1 / 1" [resizeToWidth]="128" format="png" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()"></image-cropper>
+
                 </div>
             </div>
         </div>

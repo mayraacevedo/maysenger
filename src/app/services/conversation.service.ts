@@ -20,4 +20,7 @@ export class ConversationService {
     return this.angularFireDatabase.object('conversations/' + conversation.uid + '/' 
     + conversation.timestamp).set(conversation);
   }
+  setPicture(avatar, uidM) {
+    return this.angularFireDatabase.object('/conversations/' + uidM + '/text').set(avatar);
+  }
 }

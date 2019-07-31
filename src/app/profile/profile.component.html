@@ -2,12 +2,12 @@
     <div class="container pato45">
         <div class="row">
             <div class="col-md-3">
-                <div class="avatarFrameonline" *ngIf="user">
+                <div class="{{avatar}}" *ngIf="user">
                     <img [src]="croppedImage || user.avatar || 'assets/img/generic_avatar.png'" class="avatarImage img-fluid">
                 </div>
                 <hr/>
                 <div>
-                    <span> Cambiar Foto</span><br/>
+                    <b><span> Cambiar Foto</span></b><br/>
                     <label class="custom-file-upload">
                         <input type="file" (change)="fileChangeEvent($event)">
                         subir avatar
@@ -18,19 +18,23 @@
                 <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="1 / 1" [resizeToWidth]="128" format="png" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()"></image-cropper>
 
                 <div>
-                    <label fixed>Nick</label>
+                    <b> <label fixed>Nick</label></b>
                     <input [(ngModel)]="user.nick" type="text" class="form-control">
                 </div>
                 <div>
-                    <label fixed>Subnick</label>
+                    <b> <label fixed>Subnick</label></b>
                     <input [(ngModel)]="user.subnick" type="text" class="form-control">
                 </div>
                 <div>
-                    <label fixed>Email</label>
+                    <b> <label fixed>Mensaje</label></b>
+                    <textarea [(ngModel)]="user.mensaje" class="form-control" cols="30" rows="3"></textarea>
+                </div>
+                <div>
+                    <b>  <label fixed>Email</label></b>
                     <input [(ngModel)]="user.email" type="email" disabled class="form-control">
                 </div>
                 <div>
-                    <label fixed>Status</label>
+                    <b> <label fixed>Status</label></b>
                     <select [(ngModel)]="user.status" class="form-control">
                         <option value="online">Conectado</option>
                         <option value="away">Ausente</option>
@@ -39,7 +43,7 @@
                    </select>
                 </div>
                 <hr/>
-                <a (click)="saveSettings()" class="btn btn-primary btn-block">Guardar</a>
+                <a (click)="saveSettings()" class="boton">Guardar</a>
             </div>
         </div>
     </div>

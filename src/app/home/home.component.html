@@ -3,7 +3,7 @@
         <div class="homeHeadContainer">
             <div class="row">
                 <div class="col-md-auto">
-                    <div class="avatarFrameonline">
+                    <div class="{{avatar}}">
                         <img id="homeAvatarPicture" [src]="user.avatar || 'assets/img/generic_avatar.png'">
                     </div>
                 </div>
@@ -12,9 +12,8 @@
                     <div>
                         <span>{{user.status}}</span>
                         <br/>
-                        <span>< escribe un mensaje personal ></span>
-                        <br/>
-                        <a (click)="logOut()">Logout</a>
+                        <span>{{user.mensaje}}</span>
+
                     </div>
                 </div>
             </div>
